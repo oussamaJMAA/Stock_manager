@@ -101,7 +101,7 @@ const result = Math.random().toString(36).substring(2,7);
 </div>
 <div class="form-group">
 {{ form_label(form.tax, 'Product Tax', {'label_attr': {'class': 'control-label'}}) }}
-{{ form_widget(form.tax)}}
+{{ form_widget(form.tax, { 'id': 'tax' }) }}
 </div>
 
 <div class="form-group">

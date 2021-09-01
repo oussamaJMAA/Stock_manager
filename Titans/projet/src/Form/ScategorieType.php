@@ -20,7 +20,16 @@ class ScategorieType extends AbstractType
                 'class' => Categorie::class,
                 'label' => 'nom de la catégorie',
           // uses the category name property as the visible option string
-                'choice_label' => 'nom',])
+                'choice_label' => 'nom',
+                
+                
+                'attr' => [
+                    'class' =>'select'
+                ]
+                ]
+                
+                
+                )
         ;
     }
 

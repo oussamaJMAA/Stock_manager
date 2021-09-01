@@ -17,20 +17,17 @@
 <link rel="stylesheet" href="{{asset('assets/plugins/select2/css/select2.min.css')}}">
 <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
  {% endblock %}
-<!--[if lt IE 9]>
-			<script src="assets/js/html5shiv.min.js"></script>
-			<script src="assets/js/respond.min.js"></script>
-		<![endif]-->
-</head>
-<body>
 
+</head>
+
+<body>
 
 
 <div class="header">
 
 <div class="header-left">
 <a href="index.html" class="logo">
-<img src="{{asset('assets/img/logo.png')}}" alt="Logo">
+<img src="{{asset('assets/img/logo2.png')}}" alt="Logo">
 </a>
 <a href="index.html" class="logo logo-small">
 <img src="{{asset('assets/img/logo-small.png')}}" alt="Logo" width="30" height="30">
@@ -163,19 +160,40 @@
 </div>
 </li>
 
-
+ {% if is_granted('ROLE_ADMIN') %}
 <li class="nav-item dropdown has-arrow main-drop">
 <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
 <span class="user-img">
 <img src="{{asset('assets/img/profiles/avatar-01.jpg')}}" alt="">
 <span class="status online"></span>
 </span>
+
+<span>Super_admin</span>
+</a>
+<div class="dropdown-menu">
+<a class="dropdown-item" href="{{ path('settings', {'id': app.user.id}) }}"><i data-feather="user" class="me-1"></i> Profile</a>
+<a class="dropdown-item" href="{{path('app_logout')}}"><i data-feather="log-out" class="me-1"></i> Logout</a>
+</div>
+</li>
+
+</ul>
+
+</div>
+ 
+ 
+ {% elseif is_granted('ROLE_USER') %}
+<li class="nav-item dropdown has-arrow main-drop">
+<a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
+<span class="user-img">
+<img src="{{asset('assets/img/profiles/avatar-01.jpg')}}" alt="">
+<span class="status online"></span>
+</span>
+
 <span>Admin</span>
 </a>
 <div class="dropdown-menu">
-<a class="dropdown-item" href="profile.html"><i data-feather="user" class="me-1"></i> Profile</a>
-<a class="dropdown-item" href="settings.html"><i data-feather="settings" class="me-1"></i> Settings</a>
-<a class="dropdown-item" href="login.html"><i data-feather="log-out" class="me-1"></i> Logout</a>
+<a class="dropdown-item" href="{{ path('settings', {'id': app.user.id}) }}"><i data-feather="user" class="me-1"></i> Profile</a>
+<a class="dropdown-item" href="{{path('app_logout')}}"><i data-feather="log-out" class="me-1"></i> Logout</a>
 </div>
 </li>
 
@@ -183,7 +201,25 @@
 
 </div>
 
+{% else %}
+<li class="nav-item ">
+<a href="{{path('app_login')}}" >
+<span class="user-img">
+<img src="{{asset('assets/img/profiles/login2.png')}}" alt="">
+<span class="status online"></span>
+</span>
 
+<span>Login</span>
+</a>
+
+</li>
+
+</ul>
+
+</div>
+
+ {% endif %}
+ 
 <div class="sidebar" id="sidebar">
 <div class="sidebar-inner slimscroll">
 <div id="sidebar-menu" class="sidebar-menu">
@@ -204,9 +240,9 @@
 <li class="submenu">
 <a href="#"><i data-feather="user"></i> <span>People</span> <span class="menu-arrow"></span></a>
 <ul>
-<li><a href="{{path('client_index')}}">Client</a></li>
-<li><a href="{{path('fournisseur_index')}}">Fournisseur</a></li>
-<li><a href="inbox.html">Utilisateur</a></li>
+<li><a href="{{path('client_index')}}">Clients</a></li>
+<li><a href="{{path('fournisseur_index')}}">Fournisseurs</a></li>
+<li><a href="{{path('admin_users')}}">Utilisateurs</a></li>
 </ul>
 </li>
 <li>
@@ -238,7 +274,9 @@
 <a href="#"><i data-feather="lock"></i> <span> Authentication </span> <span class="menu-arrow"></span></a>
 <ul>
 <li><a href="login.html"> Login </a></li>
-<li><a href="register.html"> Register </a></li>
+{% if is_granted('ROLE_ADMIN') %}
+<li><a href="{{path('app_register')}}"> Register </a></li>
+{% endif %}
 <li><a href="forgot-password.html"> Forgot Password </a></li>
 <li><a href="lock-screen.html"> Lock Screen </a></li>
 </ul>
@@ -298,8 +336,7 @@
 {% block body %}
 {% endblock %}
 </div>
-</div>
-</div>
+</body>
  {% block javascripts %}
 
 <script src="{{asset('assets/js/jquery-3.6.0.min.js')}}"></script>
@@ -308,7 +345,6 @@
 <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
 
 <script src="{{asset('assets/js/feather.min.js')}}"></script>
-
 <script src="{{asset('assets/plugins/slimscroll/jquery.slimscroll.min.js')}}"></script>
 
 <script src="{{asset('assets/plugins/apexchart/apexcharts.min.js')}}"></script>
@@ -316,13 +352,10 @@
 
 <script src="{{asset('assets/plugins/select2/js/select2.min.js')}}"></script>
 <script src="{{asset('assets/js/script.js')}}"></script>
-<script>
 
-
-</script>
 
 {% endblock %}
-</body>
+
 
  
 <!-- Mirrored from kanakku.dreamguystech.com/html/template/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Aug 2021 15:44:22 GMT -->

@@ -61,6 +61,9 @@ class Fournisseur
      * @ORM\OneToMany(targetEntity=Achats::class, mappedBy="fournisseur")
      */
     private $achats;
+
+  
+    
     public function getId(): ?int
     {
         return $this->id;
@@ -191,4 +194,6 @@ class Fournisseur
 
         return $this;
     }
+
+   
 }

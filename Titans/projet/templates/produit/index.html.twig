@@ -89,12 +89,13 @@
 <div class="card card-table">
 <div class="card-body">
 <div class="table-responsive">
-<table id="example1" class="table table-center table-hover datatable">
+<table id="example1" class="table">
 <thead class="thead-light">
 <tr>
 <th>ID</th>
 <th>Produit</th>
 <th>En Stock</th>
+<th>Total</th>
 
 
 
@@ -107,6 +108,8 @@
 <td>{{ produit.id }}</td>
 <td>{{ produit.nom }} ({{produit.code}})</td>
 <td>{{produit.stock}} </td>
+<td>{{produit.prix  + produit.prixm}} </th>
+
  {# <td><img src="/uploads/photos/{{produit.image}}" height="42" width="42"></td> #}
 
 

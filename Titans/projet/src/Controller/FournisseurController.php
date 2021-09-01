@@ -4,11 +4,13 @@ namespace App\Controller;
 
 use App\Entity\Fournisseur;
 use App\Form\FournisseurType;
+use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\FournisseurRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
  * @Route("/fournisseur")
@@ -37,6 +39,7 @@ class FournisseurController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($fournisseur);
+
             $entityManager->flush();
 
             return $this->redirectToRoute('fournisseur_index', [], Response::HTTP_SEE_OTHER);

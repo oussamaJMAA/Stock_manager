@@ -6,6 +6,7 @@ use App\Entity\Fournisseur;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
 class FournisseurType extends AbstractType
 {
@@ -20,6 +21,7 @@ class FournisseurType extends AbstractType
             ->add('nomE')
             ->add('numC')
             ->add('precedent')
+      
         ;
     }
 
