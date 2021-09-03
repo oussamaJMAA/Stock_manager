@@ -1,6 +1,5 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}Achats index{% endblock %}
+{% block title %}Branch index{% endblock %}
 
 {% block javascripts %}
 {{parent()}}
@@ -35,21 +34,20 @@
 </script>
 {% endblock %}
 {% block body %}
-
-
+    
    
 <div class="page-header">
 <div class="row align-items-center">
 <div class="col">
-<h3 class="page-title">Achats</h3>
+<h3 class="page-title">Branch</h3>
 <ul class="breadcrumb">
 <li class="breadcrumb-item"><a href="index.html">Dashboard</a>
 </li>
-<li class="breadcrumb-item active">Achats</li>
+<li class="breadcrumb-item active">Branch</li>
 </ul>
 </div>
 <div class="col-auto">
-<a href="{{ path('fournisseur_new') }}" class="btn btn-primary me-1">
+<a href="{{ path('branch_new') }}" class="btn btn-primary me-1">
 <i class="fas fa-plus"></i>
 </a>
 <a class="btn btn-primary filter-btn" href="javascript:void(0);" id="filter_search">
@@ -85,6 +83,7 @@
 </div>
 </div>
 
+
 <div class="row">
 <div class="col-sm-12">
 <div class="card card-table">
@@ -94,41 +93,34 @@
 <thead class="thead-light">
 <tr>
 
-      <th>Date</th>
-               <th>Biller n° </th>
-                <th>Fournisseurs</th>
-                <th>TotalNet</th>
-            
+
+
+    
+          
+                <th>Prenom</th>
+                <th>Adresse</th>
+                <th>Tel</th>
+                <th>In charge name</th>
                 
-             
-              <th>Paye</th>
-
-
-<th style="  position:relative; left:350px; " >Actions</th>
-
-</tr>
-</thead>
-
-
+<th style=" position:relative; left:350px; ">actions</th>
+            </tr>
+        </thead>
         <tbody>
-        {% for achat in achats %}
+        {% for branch in branches %}
             <tr>
-                <td>{{achat.createdAt | format_datetime('medium','none',locale='en') }} </td>
-                <td></td>
-                 <td>{{ achat.fournisseurs.prenom }}</td>
-                <td>{{ achat.totalNet }}</td>
-        
-                <td>{{ achat.paye }}</td>
-                
-                
-               
+          
+                <td>{{ branch.prenom }}</td>
+                <td>{{ branch.adresse }}</td>
+                <td>{{ branch.tel }}</td>
+                <td>{{ branch.cnom }}</td>
+                      
           <td>
 
 <div style="
     float: right;top: 160px;
-    right: 200px;"> {{ include('achats/_delete_form.html.twig') }}  </div>
-<a style="float:right "href="{{ path('achats_edit', {'id': achat.id}) }}" class="btn btn-sm btn-white text-success me-2"><i class="far fa-edit me-1"></i> Editer</a>
-<a style="float:right" href="{{ path('achats_show', {'id': achat.id}) }}" class="btn btn-sm btn-primary  "><i class="far fa-eye me-1"></i>Afficher</a>
+    right: 200px;"> {{ include('branch/_delete_form.html.twig') }}  </div>
+<a style="float:right "href="{{ path('branch_edit', {'id': branch.id}) }}" class="btn btn-sm btn-white text-success me-2"><i class="far fa-edit me-1"></i> Editer</a>
+<a style="float:right" href="{{ path('branch_show', {'id': branch.id}) }}" class="btn btn-sm btn-primary  "><i class="far fa-eye me-1"></i>Afficher</a>
 
 </td>
 </tr>

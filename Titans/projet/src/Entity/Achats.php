@@ -7,6 +7,7 @@ use App\Entity\Fournisseur;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\AchatsRepository;
+use Symfony\Component\Validator\Constraints\DateTime;
 /**
  * @ORM\Entity(repositoryClass=AchatsRepository::class)
  */
@@ -69,6 +70,13 @@ class Achats
      * @ORM\ManyToOne(targetEntity=Fournisseur::class, inversedBy="achats")
      */
     private $fournisseurs;
+
+  /**
+ * @var \DateTime
+ * @Gedmo\Mapping\Annotation\Timestampable(on="create")
+ * @Doctrine\ORM\Mapping\Column(type="datetime")
+ */
+protected $createdAt;
 
     public function getId(): ?int
     {
@@ -192,6 +200,18 @@ class Achats
     public function setFournisseurs(?Fournisseur $fournisseurs): self
     {
         $this->fournisseurs = $fournisseurs;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
 
         return $this;
     }

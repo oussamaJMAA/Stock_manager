@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Mirrored from kanakku.dreamguystech.com/html/template/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Aug 2021 15:44:07 GMT -->
+
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
@@ -246,19 +246,16 @@
 </ul>
 </li>
 <li>
-<a href="{{path('achats_index')}}"><i data-feather="credit-card"></i> <span>Achats</span></a>
+<a href="{{path('achats_index')}}"><i data-feather="gift"></i><span>Achats</span></a>
 </li>
 <li>
-<a href="expenses.html"><i data-feather="package"></i> <span>Expenses</span></a>
+<a href="{{path('vente_index')}}"><i data-feather="shopping-cart"></i> <span>Ventes</span></a>
 </li>
-<li class="submenu">
-<a href="#"><i data-feather="pie-chart"></i> <span> Reports</span> <span class="menu-arrow"></span></a>
-<ul>
-<li><a href="sales-report.html">Sales Report</a></li>
-<li><a href="expenses-report.html">Expenses Report</a></li>
-<li><a href="profit-loss-report.html">Profit & Loss Report</a></li>
-<li><a href="taxs-report.html">Taxs Report</a></li>
-</ul>
+<li>
+<a href="{{path('depense_index')}}"><i data-feather="dollar-sign"></i> <span>Frais</span></a>
+</li>
+<li>
+<a href="{{path('branch_index')}}"><i data-feather="bar-chart"></i> <span>Branch</span></a>
 </li>
 <li>
 <a href="settings.html"><i data-feather="settings"></i> <span>Settings</span></a>
@@ -354,9 +351,10 @@
 <script src="{{asset('assets/js/script.js')}}"></script>
 
 
+
 {% endblock %}
 
 
  
-<!-- Mirrored from kanakku.dreamguystech.com/html/template/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Aug 2021 15:44:22 GMT -->
+
 </html>
