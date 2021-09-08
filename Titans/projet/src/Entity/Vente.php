@@ -2,9 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\VenteRepository;
 use Doctrine\ORM\Mapping as ORM;
-
+use App\Repository\VenteRepository;
+use Symfony\Component\Validator\Constraints\Date;
+use Symfony\Component\Validator\Constraints\DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 /**
  * @ORM\Entity(repositoryClass=VenteRepository::class)
  */
@@ -16,11 +19,8 @@ class Vente
      * @ORM\Column(type="integer")
      */
     private $id;
+ 
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Produit::class, inversedBy="ventes")
-     */
-    private $produit;
 
     /**
      * @ORM\ManyToOne(targetEntity=Client::class, inversedBy="ventes")
@@ -41,23 +41,28 @@ class Vente
      * @ORM\Column(type="float")
      */
     private $prix_u;
+  /**
+ * @var \Date
+ * @Gedmo\Mapping\Annotation\Timestampable(on="create")
+ * @Doctrine\ORM\Mapping\Column(type="date")
+ */
+public $createdAt;
 
+/**
+ * @ORM\ManyToMany(targetEntity=Produit::class, inversedBy="ventes")
+ */
+private $produits;
+
+public function __construct()
+{
+    $this->produits = new ArrayCollection();
+}
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getProduit(): ?Produit
-    {
-        return $this->produit;
-    }
-
-    public function setProduit(?Produit $produit): self
-    {
-        $this->produit = $produit;
-
-        return $this;
-    }
+  
 
     public function getClient(): ?Client
     {
@@ -106,4 +111,35 @@ class Vente
 
         return $this;
     }
+
+    /**
+     * @return Collection|Produit[]
+     */
+    public function getProduits(): Collection
+    {
+        return $this->produits;
+    }
+
+    public function addProduit(Produit $produit): self
+    {
+        if (!$this->produits->contains($produit)) {
+            $this->produits[] = $produit;
+        }
+
+        return $this;
+    }
+
+    public function removeProduit(Produit $produit): self
+    {
+        $this->produits->removeElement($produit);
+
+        return $this;
+    }
+    public function __tostring(){
+        return $this->nom;
+    }
+
+    
+   
+
 }

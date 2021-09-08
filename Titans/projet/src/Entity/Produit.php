@@ -88,10 +88,19 @@ class Produit
      * @ORM\OneToMany(targetEntity=Achats::class, mappedBy="produit")
      */
     private $achats;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Vente::class, mappedBy="produits")
+     */
+    private $ventes;
+
+    public function __construct()
+    {
+        $this->ventes = new ArrayCollection();
+    }
     
-  
- 
    
+
 
     public function getId(): ?int
     {
@@ -283,8 +292,35 @@ class Produit
 
         return $this;
     }
- 
 
+    /**
+     * @return Collection|Vente[]
+     */
+    public function getVentes(): Collection
+    {
+        return $this->ventes;
+    }
+
+    public function addVente(Vente $vente): self
+    {
+        if (!$this->ventes->contains($vente)) {
+            $this->ventes[] = $vente;
+            $vente->addProduit($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVente(Vente $vente): self
+    {
+        if ($this->ventes->removeElement($vente)) {
+            $vente->removeProduit($this);
+        }
+
+        return $this;
+    }
+ 
+ 
        
     
 

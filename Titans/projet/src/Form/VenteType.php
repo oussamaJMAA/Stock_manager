@@ -21,21 +21,21 @@ class VenteType extends AbstractType
             ->add('quantite')
             ->add('modePaie', ChoiceType::class, [
                 'choices' => [
-                    'Espece'=> false,
-                    'Cheque'=> false,
+                    'Espece'=>'Espece',
+                    'Cheque' => 'Cheque'
                 ],
                 'placeholder'=> 'Selectionnez Le Mode De paiement'
             ])
-            ->add('produit', EntityType::class, [
-                // looks for choices from this entity
-                'class' => Produit::class,
-                'label' => 'Produit',
-          // uses the category name property as the visible option string
-                'choice_label' => 'nom',
-                'placeholder'=> 'Selectionnez Le Produit'
-                   // 'onchange' => 'showUser(this.value);'
 
-            ])
+            
+            ->add('produits', EntityType::class, array(
+                'class' => Produit::class,
+              
+                'choice_label' => 'nom',
+                'multiple' => true,
+                'expanded' => true,
+                'required' => false))
+
                 ->add('client', EntityType::class, [
                     // looks for choices from this entity
                     'class' => Client::class,

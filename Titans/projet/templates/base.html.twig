@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
  <title>{% block title %}Welcome!{% endblock %}</title>
    {% block stylesheets %}
-<link rel="shortcut icon" href="{{asset('assets/img/favicon.png')}}">
+<link rel="shortcut icon" href="{{asset('assets/img/logo-small2.png')}}">
 
 <link rel="stylesheet" href="{{asset('assets/plugins/datatables/datatables.min.css')}}">
 <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
@@ -30,7 +30,7 @@
 <img src="{{asset('assets/img/logo2.png')}}" alt="Logo">
 </a>
 <a href="index.html" class="logo logo-small">
-<img src="{{asset('assets/img/logo-small.png')}}" alt="Logo" width="30" height="30">
+<img src="{{asset('assets/img/logo-small2.png')}}" alt="Logo" width="30" height="30">
 </a>
 </div>
 
@@ -94,10 +94,13 @@
 <img class="avatar-img rounded-circle" alt="" src="{{asset('assets/img/profiles/avatar-02.jpg')}}">
 </span>
 <div class="media-body">
+{% if p == 0  %}
+
 <p class="noti-details"><span class="noti-title">Brian Johnson</span> paid the invoice <span class="noti-title">#DF65485</span></p>
 <p class="noti-time"><span class="notification-time">4 mins ago</span></p>
 </div>
 </div>
+{% endif %}
 </a>
 </li>
  <li class="notification-message">
@@ -226,7 +229,7 @@
 <ul>
 <li class="menu-title"><span>Main</span></li>
 <li class="active">
-<a href="index.html"><i data-feather="home"></i> <span>Dashboard</span></a>
+<a href="{{path('dashboard')}}"><i data-feather="home"></i> <span>Dashboard</span></a>
 </li>
 <li>
 <a href="{{path('categorie_index')}}"><i data-feather="package"></i> <span>Categories</span></a>
@@ -344,8 +347,6 @@
 <script src="{{asset('assets/js/feather.min.js')}}"></script>
 <script src="{{asset('assets/plugins/slimscroll/jquery.slimscroll.min.js')}}"></script>
 
-<script src="{{asset('assets/plugins/apexchart/apexcharts.min.js')}}"></script>
-<script src="{{asset('assets/plugins/apexchart/chart-data.js')}}"></script>
 
 <script src="{{asset('assets/plugins/select2/js/select2.min.js')}}"></script>
 <script src="{{asset('assets/js/script.js')}}"></script>

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Vente;
 use App\Form\VenteType;
+use App\Repository\ProduitRepository;
 use App\Repository\VenteRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,10 +19,11 @@ class VenteController extends AbstractController
     /**
      * @Route("/", name="vente_index", methods={"GET"})
      */
-    public function index(VenteRepository $venteRepository): Response
+    public function index(VenteRepository $venteRepository , ProduitRepository $p): Response
     {
         return $this->render('vente/index.html.twig', [
             'ventes' => $venteRepository->findAll(),
+            'produits' => $p->findAll()
         ]);
     }
 

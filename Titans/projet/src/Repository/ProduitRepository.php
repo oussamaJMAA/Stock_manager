@@ -3,8 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Produit;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\DBAL\DBALException;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @method Produit|null find($id, $lockMode = null, $lockVersion = null)
@@ -47,4 +48,27 @@ class ProduitRepository extends ServiceEntityRepository
         ;
     }
     */
+
+
+
+     //count the number of clients 
+
+
+
+
+     public function countP() {
+        try {
+            $stmt=$this->getEntityManager()
+                       ->getConnection()
+                       ->prepare(" SELECT count(*) from produit ;  ");
+                       $stmt->execute();
+                       return $stmt->fetchColumn();
+        } catch(DBALException $e) {
+            return $e;
+        }
+       
+    }
+
 }
+
+

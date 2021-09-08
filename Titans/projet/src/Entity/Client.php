@@ -2,8 +2,9 @@
 
 namespace App\Entity;
 
-use App\Repository\ClientRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ClientRepository;
+use Symfony\Component\Validator\Constraints\Date;
 
 /**
  * @ORM\Entity(repositoryClass=ClientRepository::class)
@@ -57,6 +58,12 @@ class Client
      */
     private $precedent;
 
+  /**
+ * @var \Date
+ * @Gedmo\Mapping\Annotation\Timestampable(on="create")
+ * @Doctrine\ORM\Mapping\Column(type="date")
+ */
+public $createdAt;
     public function getId(): ?int
     {
         return $this->id;

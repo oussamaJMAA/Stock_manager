@@ -3,8 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Client;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\DBAL\DBALException;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @method Client|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,6 +20,53 @@ class ClientRepository extends ServiceEntityRepository
         parent::__construct($registry, Client::class);
     }
 
+
+
+    //count the number of clients 
+
+
+
+
+    public function countC() {
+        try {
+            $stmt=$this->getEntityManager()
+                       ->getConnection()
+                       ->prepare(" SELECT count(*) from client ;  ");
+                       $stmt->execute();
+                       return $stmt->fetchColumn();
+        } catch(DBALException $e) {
+            return $e;
+        }
+       
+    }
+
+    //client added last week
+    public function countLW() {
+        try {
+            $stmt=$this->getEntityManager()
+                       ->getConnection()
+                       ->prepare(" SELECT COUNT(*) FROM client where week(created_at)=week(now())-1; ");
+                       $stmt->execute();
+                       return $stmt->fetchColumn();
+        } catch(DBALException $e) {
+            return $e;
+        }
+       
+    }
+    //client added this week
+    public function countCW() {
+        try {
+            $stmt=$this->getEntityManager()
+                       ->getConnection()
+                       ->prepare(" SELECT COUNT(*) FROM client where week(created_at)=week(now()); ");
+                       $stmt->execute();
+                       return $stmt->fetchColumn();
+        } catch(DBALException $e) {
+            return $e;
+        }
+       
+    }
+    
     // /**
     //  * @return Client[] Returns an array of Client objects
     //  */
